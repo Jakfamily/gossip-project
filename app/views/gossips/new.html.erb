@@ -1,0 +1,56 @@
+<div class="container contact" style="height:80vh">
+  <div class="row">
+    <div class="col-md-3">
+      <div class="contact-info">
+      <br>
+      <br>
+      <br>
+        <h1>Crée un nouveau potin !</h1>
+      </div>
+    </div>
+    <div class="col-md-9">
+     <%= form_for @gossip, url: gossips_path, html: {class: "contact-form"}, method: :post do |f| %>
+
+        <% if @gossip.errors.any? %>
+          <div class="alert alert-danger">
+            <h4><%= pluralize(@gossip.errors.count, "error") %> prohibited this gossip from being saved:</h4>
+            <ul>
+              <% @gossip.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+        <% flash.each do |key, value| %>
+          <div class="alert alert-<%= key %>"><%= value %></div>
+        <% end %>
+        <div class="form-group">
+          <%= f.label :user_id, "Auteur :", class: "control-label col-sm-2" %>
+          <div class="col-sm-10">
+            <%= f.collection_select :user_id, User.all, :id, :first_name, {prompt: "Sélectionnez un auteur"}, class: "form-control" %>
+          </div>
+        </div>
+        <br>
+        <div class="form-group">
+          <%= f.label :title, "Titre :", class: "control-label col-sm-2" %>
+          <div class="col-sm-10">
+            <%= f.text_field :title, class: "form-control", placeholder: "Entrez le titre du potin" %>
+          </div>
+        </div>
+        <br>
+        <div class="form-group">
+          <%= f.label :content, "Contenu :", class: "control-label col-sm-2" %>
+          <div class="col-sm-10">
+            <%= f.text_area :content, class: "form-control", rows: 5, placeholder: "Entrez le contenu du potin" %>
+          </div>
+        </div>
+        <br>
+        <div class="form-group">        
+				  <div class="col-sm-offset-2 col-sm-10">
+					<button type="submit" class="btn btn-default">Envoyer</button>
+				  </div>
+				</div>
+      <% end %>
+    </div>
+  </div>
+</div>

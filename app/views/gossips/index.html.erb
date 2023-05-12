@@ -1,0 +1,17 @@
+<main class="container">
+  <h1 class="text-center mb-5">Bienvenue sur The Gossip Project</h1>
+  <p class="text-center mb-5" style="color:#8064a2">Parcours le mur des gossips pour voir les dernières nouveautés</p>
+
+  <section class="row justify-content-center">
+    <% @gossips.each do |gossip| %>
+      <article class="card mb-3 mx-4 card-home">
+        <div class="card-body">
+          <h2 class="card-title"><%= gossip.title %></h2>
+          <p class="card-text"><em><%= gossip.content %></em></p>
+          <p class="card-text">Par <%= gossip.user.first_name %></p>
+          <a href="<%= gossip_path(gossip) %>" class="btn btn-primary">Voir le potin</a>
+        </div>
+      </article>
+    <% end %>
+  </section>
+</main>

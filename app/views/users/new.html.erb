@@ -1,0 +1,62 @@
+<div class="container contact" style="height:80vh">
+  <div class="row">
+    <div class="col-md-3">
+      <div class="contact-info">
+        <h1>Créer un nouveau compte utilisateur</h1>
+      </div>
+    </div>
+    <div class="col-md-9">
+      <%= form_with model: @user, local: true do |form| %>
+        <% if @user.errors.any? %>
+          <div id="error_explanation">
+            <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+            <ul>
+              <% @user.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+        <div class="form-group">
+          <%= form.label :first_name, "First name" %>
+          <%= form.text_field :first_name, class: "form-control", placeholder: "Enter your first name" %>
+        </div>
+        <div class="form-group">
+          <%= form.label :last_name, "Last name" %>
+          <%= form.text_field :last_name, class: "form-control", placeholder: "Enter your last name" %>
+        </div>
+        <div class="form-group">
+          <%= form.label :description, "Description" %>
+          <%= form.text_area :description, class: "form-control", placeholder: "Enter a description" %>
+        </div>
+        <div class="form-group">
+          <%= form.label :email, "Email" %>
+          <%= form.email_field :email, class: "form-control", placeholder: "Enter your email" %>
+        </div>
+        <div class="form-group">
+          <%= form.label :age, "Age" %>
+          <%= form.number_field :age, class: "form-control", placeholder: "Enter your age" %>
+        </div>
+        <div class="form-group">
+          <%= form.label :city_name, "City name" %>
+          <%= form.text_field :city_name, class: "form-control", placeholder: "Enter the name of your city" %>
+        </div>
+        <div class="form-group">
+          <%= form.label :city_zip_code, "City zip code" %>
+          <%= form.number_field :city_zip_code, class: "form-control", placeholder: "Enter the zip code of your city" %>
+        </div>
+        <div class="form-group">
+          <%= form.label :password, "Password" %>
+          <%= form.password_field :password, class: "form-control", placeholder: "Enter your password" %>
+        </div>
+        <div class="form-group">
+          <%= form.label :password_confirmation, "Confirm Password" %>
+          <%= form.password_field :password_confirmation, class: "form-control", placeholder: "Confirm your password" %>
+        </div>
+        <div class="form-group">
+          <%= form.submit "Create account", class: "btn btn-default" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
