@@ -1,6 +1,8 @@
 class GossipsController < ApplicationController
+
   def index
     @gossips = Gossip.all
+    @gossip = Gossip.first
   end
 
   def show
@@ -13,13 +15,19 @@ class GossipsController < ApplicationController
     end
   end
   
-
   def new
     @gossip = Gossip.new
+    if current_user
+      @user_id = current_user.id
+    else
+      redirect_to new_session_path, notice: "Vous devez vous connecter pour publier un potin."
+    end
   end
 
   def create
-    @gossip = Gossip.new(gossip_params)
+    @user = User.find(current_user.id)
+    @gossip = @user.gossips.build(gossip_params)
+
     if @gossip.save
       redirect_to gossips_path
     else
@@ -45,6 +53,12 @@ class GossipsController < ApplicationController
     @gossip.destroy
     redirect_to gossips_path
   end
+
+  def user_gossips
+    @user = User.find(params[:user_id])
+    @gossips = @user.gossips
+  end
+   
   private
 
   def gossip_params

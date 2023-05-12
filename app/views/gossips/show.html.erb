@@ -1,2 +1,15 @@
-<h1>Gossips#show</h1>
-<p>Find me in app/views/gossips/show.html.erb</p>
+<h1><%= @gossip.title %></h1>
+<p><%= @gossip.content %></p>
+
+<h2>Commentaires</h2>
+<ul>
+  <% @comments.each do |comment| %>
+    <li><%= comment.content %></li>
+  <% end %>
+</ul>
+
+<%= render 'comments/form' %>
+
+<%= link_to "Modifier", edit_gossip_path(@gossip), class: "btn btn-primary" %>
+<%= link_to "Supprimer", gossip_path(@gossip), method: :delete, data: { confirm: "Êtes-vous sûr de vouloir supprimer ce potin ?" }, class: "btn btn-danger" %>
+<%= link_to "Retour", gossips_path, class: "btn btn-secondary" %>

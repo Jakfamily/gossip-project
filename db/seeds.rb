@@ -9,7 +9,7 @@ require 'faker'
 end
 
 # création de 10 utilisateurs et assignation aléatoire à une ville
-10.times do
+5.times do
   user = User.create(
     first_name: Faker::Name.first_name,
     last_name: Faker::Name.last_name,
@@ -22,14 +22,14 @@ end
 end
 
 # création de 10 tags
-10.times do
+5.times do
   Tag.create(
     title: Faker::Lorem.word
   )
 end
 
 # création de 20 gossips et assignation aléatoire à un utilisateur et à un tag
-20.times do
+5.times do
   gossip = Gossip.create(
     title: Faker::Book.title,
     content: Faker::Lorem.paragraph(sentence_count: 5)
@@ -54,7 +54,7 @@ end
 end
 
 # création de 20 commentaires et assignation aléatoire à un utilisateur et à un gossip
-20.times do
+10.times do
   comment = Comment.create(
     content: Faker::Lorem.paragraph(sentence_count: 2)
   )
@@ -64,7 +64,7 @@ end
 end
 
 # création de 20 likes aléatoires
-20.times do
+10.times do
   like = Like.create
   like.user = User.all.sample
   like.likeable = [Gossip.all, Comment.all].sample.sample

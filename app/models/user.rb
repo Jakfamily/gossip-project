@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  attr_accessor :city_name
 
   belongs_to :city
   has_many :gossips

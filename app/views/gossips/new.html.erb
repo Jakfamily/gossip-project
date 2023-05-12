@@ -10,6 +10,7 @@
     </div>
     <div class="col-md-9">
      <%= form_for @gossip, url: gossips_path, html: {class: "contact-form"}, method: :post do |f| %>
+        <%= f.hidden_field :user_id, value: (@user_id || current_user.id) %>
 
         <% if @gossip.errors.any? %>
           <div class="alert alert-danger">
