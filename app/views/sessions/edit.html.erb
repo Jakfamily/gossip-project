@@ -1,2 +1,33 @@
-<h1>Sessions#edit</h1>
-<p>Find me in app/views/sessions/edit.html.erb</p>
+<div class="container contact" style="height:80vh">
+  <div class="row">
+    <div class="col-md-3">
+      <div class="contact-info">
+      <br>
+      <br>
+      <br>
+        <h1>Change Password</h1>
+      </div>
+    </div>
+    <div class="col-md-9">
+      <%= form_for @user || User.new, url: new_session_path, method: :post, html: {class: "contact-form"} do |f| %>
+        <% if flash[:success] %>
+          <div class="alert alert-success" role="alert">
+            <%= flash[:success] %>
+          </div>
+        <% end %>
+        <% if flash[:danger] %>
+          <div class="alert alert-danger" role="alert">
+            <%= flash[:danger] %>
+          </div>
+        <% end %>
+        <%= f.label :password %><br>
+        <%= f.password_field :password %><br>
+        <%= f.label :password_confirmation %><br>
+        <%= f.password_field :password_confirmation %><br>
+        <%= f.submit 'Change Password' %>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+

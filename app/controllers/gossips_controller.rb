@@ -1,8 +1,8 @@
 class GossipsController < ApplicationController
+  before_action :require_login
 
   def index
     @gossips = Gossip.all
-    @gossip = Gossip.first
   end
 
   def show
@@ -25,11 +25,10 @@ class GossipsController < ApplicationController
   end
 
   def create
-    @user = User.find(current_user.id)
-    @gossip = @user.gossips.build(gossip_params)
-
+    @gossip = current_user.gossips.build(gossip_params)
     if @gossip.save
-      redirect_to gossips_path
+      flash[:success] = "Gossip created"
+      redirect_to root_path
     else
       render 'new'
     end
@@ -64,4 +63,16 @@ class GossipsController < ApplicationController
   def gossip_params
     params.require(:gossip).permit(:title, :content)
   end
+
+  def require_login
+    unless logged_in?
+      flash[:danger] = "Please log in"
+      redirect_to new_user_path
+    end
+  end
+  
+  def logged_in?
+    !current_user.nil?
+  end
+
 end

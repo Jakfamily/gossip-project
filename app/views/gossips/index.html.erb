@@ -1,11 +1,19 @@
 <main class="container">
+  <% if logged_in? %>
+    <%# Affiche le message de bienvenue si l'utilisateur est connecté %>
+    <div class="alert alert-success">
+      <p>Bienvenue <%= current_user.first_name %> ! Vous êtes maintenant connecté.</p>
+    </div>
+  <% end %>
+
   <h1 class="text-center mb-5">Bienvenue sur The Gossip Project</h1>
   <p class="text-center mb-5" style="color:#8064a2">Parcours le mur des gossips pour voir les dernières nouveautés</p>
 
-<%= link_to "New Gossip", new_gossip_path(user_id: current_user.try(:id)) %>
-<% @gossips.each do |gossip| %>
-  <%= link_to "Modifier", edit_gossip_path(gossip), class: "btn btn-primary" %>
-<% end %>
+  <%= link_to "New Gossip", new_gossip_path(user_id: current_user.try(:id)) %>
+  <% @gossips.each do |gossip| %>
+    <%= link_to "Modifier", edit_gossip_path(gossip), class: "btn btn-primary" %>
+  <% end %>
+
   <section class="row justify-content-center">
     <% @gossips.each do |gossip| %>
       <article class="card mb-3 mx-4 card-home">

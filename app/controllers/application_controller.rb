@@ -17,14 +17,5 @@ class ApplicationController < ActionController::Base
   def current_user
     @current_user ||= User.find_by(id: session[:user_id])
   end
-
-  def new
-    if logged_in?
-      @gossip = Gossip.new
-      @user_id = current_user.id
-    else
-      redirect_to login_path, alert: "Vous devez être connecté pour créer un potin."
-    end
-  end
 end
 

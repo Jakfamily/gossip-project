@@ -1,4 +1,6 @@
 class SessionsController < ApplicationController
+  before_action :require_login, only: [:edit, :update]
+
   def new
   end
 
@@ -25,6 +27,7 @@ class SessionsController < ApplicationController
   end
 
   def edit
+    @user = User.find(current_user.id)
   end
 
   def update
@@ -40,5 +43,16 @@ class SessionsController < ApplicationController
 
   def user_params
     params.require(:user).permit(:password, :password_confirmation)
+  end
+
+  def require_login
+    unless logged_in?
+      flash[:danger] = "Please login"
+      redirect_to login_path
+    end
+  end
+
+  def logged_in?
+    !current_user.nil?
   end
 end
